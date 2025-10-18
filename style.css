@@ -1,8 +1,14 @@
 html, body {
-  margin: 0;
+  margin: 10;
   padding: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-canvas {
-  display: block;
+.canvas {
+  width: 100vw;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
 }

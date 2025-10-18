@@ -32,8 +32,9 @@ function withinRows(j) {
   return j >= 0 && j <= rows - 1;
 }
 
+var canvas = document.getElementById("canvas");
 function setup() {
-  createCanvas(600, 700);
+  //createCanvas(windowWidth, 500)
   colorMode(HSB, 360, 255, 255);
   cols = width / w;
   rows = height / w;

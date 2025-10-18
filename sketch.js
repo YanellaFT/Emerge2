@@ -17,7 +17,10 @@ let grid;
 let w = 5;
 let cols, rows;
 
-let hueValue = 200;
+// restrict hues to yellow tones
+let minHue = 40;
+let maxHue = 65;
+let hueValue = minHue;
 
 //check to see if column is in bounds
 function withinCols(i) {
@@ -35,6 +38,8 @@ function setup() {
   cols = width / w;
   rows = height / w;
   grid = make2DArray(cols, rows);
+
+  matrixSize = createSlider(5, 30, 10, 1);
 }
 
 function mouseDragged() {
@@ -42,12 +47,12 @@ function mouseDragged() {
   let mouseRow = floor(mouseY / w);
 
   //randomly add an area of sand around mouse click
-  let matrix = 10; //add dragger so user can change this value
-  let extent = floor(matrix/2);
+  let matrix = matrixSize.value();
+  let extent = floor(matrix/10);
   for (let i = -extent; i <= extent; i++) {
     for (let j = -extent; j <= extent; j ++) {
       if (random(1) < 0.75) {
-        let col = mouseCol + 1;
+        let col = mouseCol + i;
         let row = mouseRow + j;
         if (withinCols(col) && withinRows(row)) {
           grid[col][row] = hueValue;
@@ -57,10 +62,37 @@ function mouseDragged() {
   }
   //change the color of the sand
   hueValue += 1;
-  if (hueValue > 360) {
-    hueValue = 1;
+  // keep the hue inside the yellow range
+  if (hueValue > maxHue) {
+    hueValue = minHue;
   }
-} //add function mousePressed() for single clicks
+} 
+
+function mousePressed() {
+  let mouseCol = floor(mouseX / w);
+  let mouseRow = floor(mouseY / w);
+
+  //randomly add an area of sand around mouse click
+  let matrix = matrixSize.value() / 5; 
+  let extent = floor(matrix/4);
+  for (let i = -extent; i <= extent; i++) {
+    for (let j = -extent; j <= extent; j ++) {
+      if (random(1) < 0.75) {
+        let col = mouseCol + i;
+        let row = mouseRow + j;
+        if (withinCols(col) && withinRows(row)) {
+          grid[col][row] = hueValue;
+        }
+      }
+    }
+  }
+  //change the color of the sand
+  hueValue += 1;
+  // keep the hue inside the yellow range
+  if (hueValue > maxHue) {
+    hueValue = minHue;
+  }
+}
 
 function draw() {
   background(0);

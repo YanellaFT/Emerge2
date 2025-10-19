@@ -6,9 +6,10 @@ html, body {
   text-align: center;
 }
 
-.canvas {
-  width: 100vw;
-  height: 500px;
-  align-items: center;
-  justify-content: center;
+h1 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+p {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
